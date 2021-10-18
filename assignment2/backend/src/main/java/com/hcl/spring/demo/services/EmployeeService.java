@@ -28,9 +28,7 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Employee employee, Long id) {
-        if (employeeDAO.getEmployeeById(id) != null)
-            employeeDAO.saveEmployee(employee);
-        return employee;
+        return employeeDAO.updateEmployee(employee,id);
     }
 
     public Employee deleteEmployeeById(Long id) {

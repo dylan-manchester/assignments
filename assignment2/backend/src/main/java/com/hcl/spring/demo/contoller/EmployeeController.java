@@ -3,6 +3,7 @@ package com.hcl.spring.demo.contoller;
 import com.hcl.spring.demo.models.Employee;
 import com.hcl.spring.demo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,28 +15,33 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/")
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/")
-    public Employee createEmployee(@RequestBody Employee employee) {
-        return employeeService.saveEmployee(employee);
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+        return ResponseEntity.ok(employeeService.saveEmployee(employee));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{id}")
-    public Employee updateEmployee(@RequestBody Employee employee, @PathVariable Long id) {
-        return employeeService.updateEmployee(employee,id);
+    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.updateEmployee(employee,id));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{id}")
-    public Employee deleteEmployee(@PathVariable Long id) {
-        return employeeService.deleteEmployeeById(id);
+    public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.deleteEmployeeById(id));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Long id) {
-        return employeeService.getEmployeeById(id);
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
 }

@@ -29,8 +29,11 @@ public class JpaProvider implements EmployeeDAO {
 
     @Override
     public Employee updateEmployee(Employee employee, Long id) {
-        if (jpaRepo.findById(id).orElse(null) != null)
-            jpaRepo.save(employee);
+        Employee old = jpaRepo.getById(id);
+        old.setFirstName(employee.getFirstName());
+        old.setLastName(employee.getLastName());
+        old.setEmail(employee.getEmail());
+        jpaRepo.save(old);
         return employee;
     }
 
