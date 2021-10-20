@@ -15,31 +15,31 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @GetMapping("/")
     public ResponseEntity<List<Employee>> getAllEmployees() {
         return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @PostMapping("/")
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
         return ResponseEntity.ok(employeeService.saveEmployee(employee));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable Long id) {
         return ResponseEntity.ok(employeeService.updateEmployee(employee,id));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id) {
         return ResponseEntity.ok(employeeService.deleteEmployeeById(id));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
         return ResponseEntity.ok(employeeService.getEmployeeById(id));
