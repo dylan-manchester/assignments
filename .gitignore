@@ -1,14 +1,14 @@
 # dependencies
-/node_modules
-/.pnp
+node_modules
+.pnp
 .pnp.js
 
 # testing
-/coverage
+coverage
 
 # production
-/build
-/target
+build
+target
 
 # misc
 .DS_Store
@@ -18,7 +18,7 @@
 .env.production.local
 
 # Idea
-/.idea
+.idea
 
 # logs
 npm-debug.log*
