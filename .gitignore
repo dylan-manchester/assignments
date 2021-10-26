@@ -20,6 +20,10 @@ target
 # Idea
 .idea
 
+# Derby
+derbydata
+derby.log
+
 # logs
 npm-debug.log*
 yarn-debug.log*
