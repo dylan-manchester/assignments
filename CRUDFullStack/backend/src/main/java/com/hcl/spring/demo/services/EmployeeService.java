@@ -1,6 +1,6 @@
 package com.hcl.spring.demo.services;
 
-import com.hcl.spring.demo.DAO.EmployeeDAO;
+import com.hcl.spring.demo.dao.EmployeeDAO;
 import com.hcl.spring.demo.models.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
