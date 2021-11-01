@@ -22,7 +22,7 @@ jobs:
           path: ~/CRUDFullStack
       - run:
           name: ls
-          command: ls
+          command: ls -R ~
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
@@ -40,7 +40,7 @@ jobs:
           path: ~/CRUDFullStack
       - run:
           name: ls
-          command: ls
+          command: ls -R ~
       # Next, the node orb's install-packages step will install the dependencies from a package.json.
       # The orb install-packages step will also automatically cache them for faster future runs.
       - node/install-packages:
