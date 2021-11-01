@@ -17,12 +17,11 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/openjdk
     docker:
       - image: cimg/openjdk:11.0
-    # Change where the job is executed from
-    working_directory: ~/CRUDFullStack/frontend
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
-      - checkout
+      - checkout:
+          path ~/CRUDFullStack/backend
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
@@ -33,10 +32,10 @@ jobs:
   frontend-build-test:
     docker:
       - image: cimg/node:16.10
-    working_directory: ~/CRUDFullStack/frontend
     steps:
       # Checkout the code as the first step.
-      - checkout
+      - checkout:
+          path: ~/CRUDFullStack/frontend
       # Next, the node orb's install-packages step will install the dependencies from a package.json.
       # The orb install-packages step will also automatically cache them for faster future runs.
       - node/install-packages:
