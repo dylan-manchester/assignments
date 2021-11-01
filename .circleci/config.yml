@@ -19,9 +19,13 @@ jobs:
       - image: cimg/openjdk:11.0
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    working_directory: ~/CRUDFullStack/backend
     steps:
       - checkout:
           path: ~/CRUDFullStack/backend
+      - run:
+          name: ls
+          command: ls
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
@@ -32,10 +36,14 @@ jobs:
   frontend-build-test:
     docker:
       - image: cimg/node:16.10
+    working_directory: ~/CRUDFullStack/frontend
     steps:
       # Checkout the code as the first step.
       - checkout:
           path: ~/CRUDFullStack/frontend
+      - run:
+          name: ls
+          command: ls
       # Next, the node orb's install-packages step will install the dependencies from a package.json.
       # The orb install-packages step will also automatically cache them for faster future runs.
       - node/install-packages:
