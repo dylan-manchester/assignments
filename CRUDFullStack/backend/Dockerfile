@@ -2,7 +2,7 @@
 FROM maven:3.8-openjdk-8-slim AS build
 COPY src /app/src
 COPY pom.xml /app
-RUN mvn -f app/pom.xml -Dmaven.test.skip clean package
+RUN mvn -f /app/pom.xml clean package
 
 # Deploy
 FROM openjdk:8-jre-alpine
