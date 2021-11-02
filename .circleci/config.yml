@@ -61,6 +61,8 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
+      - backend-build-test
+      - frontend-build-test
       - build-images:
           requires:
             - backend-build-test
