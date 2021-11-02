@@ -65,6 +65,6 @@ workflows:
           requires:
             - backend-build-test
             - frontend-build-test
-      - push-images
+      - push-images:
           requires:
             - build-images
