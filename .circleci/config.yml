@@ -46,12 +46,6 @@ jobs:
       - run:
           name: Build Docker images
           command: docker-compose build
-
-  push-images:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - setup_remote_docker
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
@@ -63,10 +57,7 @@ workflows:
     jobs:
       - backend-build-test
       - frontend-build-test
-      - build-images:
+      - build-push-images:
           requires:
             - backend-build-test
             - frontend-build-test
-      - push-images:
-          requires:
-            - build-images
