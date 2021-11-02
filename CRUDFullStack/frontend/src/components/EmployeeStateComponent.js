@@ -50,7 +50,7 @@ class EmployeeStateComponent extends Component {
                                 <tr>
                                     <th> Employee First Name</th>
                                     <th> Employee Last Name</th>
-                                    <th> Employee Email Id</th>
+                                    <th> Employee Email</th>
                                     <th> Actions</th>
                                 </tr>
                             </thead>

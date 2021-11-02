@@ -9,6 +9,8 @@ class ViewEmployeeComponent extends Component {
             id: this.props.match.params.id,
             employee: {}
         }
+		
+		this.cancel = this.cancel.bind(this);
     }
 
     componentDidMount(){
@@ -16,6 +18,10 @@ class ViewEmployeeComponent extends Component {
             this.setState({employee: res.data});
         })
     }
+	
+	cancel() {
+		this.props.history.push('/employees');
+	}
 
     render() {
         return (
@@ -33,12 +39,12 @@ class ViewEmployeeComponent extends Component {
                             <div> { this.state.employee.lastName }</div>
                         </div>
                         <div className = "row">
-                            <label> Employee Email ID: </label>
+                            <label> Employee Email: </label>
                             <div> { this.state.employee.email }</div>
                         </div>
                     </div>
-
                 </div>
+				<button className="btn btn-danger" onClick={this.cancel}>Return</button>
             </div>
         )
     }
