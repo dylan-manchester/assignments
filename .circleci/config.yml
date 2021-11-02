@@ -35,7 +35,7 @@ jobs:
           name: Run tests
           command: npm test
 
-  build-images:
+  build-push-images:
     docker:
       - image: circleci/buildpack-deps:stretch
     working_directory: ~/project/CRUDFullStack/
