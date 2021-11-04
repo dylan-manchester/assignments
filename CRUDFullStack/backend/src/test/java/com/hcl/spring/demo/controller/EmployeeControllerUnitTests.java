@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.event.annotation.AfterTestMethod;
-import org.springframework.test.context.event.annotation.BeforeTestMethod;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -38,7 +36,10 @@ public class EmployeeControllerUnitTests {
     @BeforeEach
     void setup() {
         this.objectMapper = new ObjectMapper();
-        this.employee = new Employee("Sam", "Emp", "sam.emp@gmail.com");
+        this.employee = new Employee();
+        this.employee.setFirstName("Sam");
+        this.employee.setLastName("Emp");
+        this.employee.setEmail("sam.emp@gmail.com");
     }
 
     @AfterEach
@@ -66,7 +67,7 @@ public class EmployeeControllerUnitTests {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
-        Assertions.assertEquals(objectMapper.readValue(result.getResponse().getContentAsByteArray(),Employee.class),employee);
+        Assertions.assertEquals(objectMapper.readValue(result.getResponse().getContentAsByteArray(), Employee.class),employee);
     }
 
     @Test
@@ -79,7 +80,7 @@ public class EmployeeControllerUnitTests {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
-        Assertions.assertEquals(objectMapper.readValue(result.getResponse().getContentAsByteArray(),Employee.class),employee);
+        Assertions.assertEquals(objectMapper.readValue(result.getResponse().getContentAsByteArray(), Employee.class),employee);
     }
 
     @Test
@@ -90,7 +91,7 @@ public class EmployeeControllerUnitTests {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
-        Assertions.assertEquals(objectMapper.readValue(result.getResponse().getContentAsByteArray(),Employee.class),employee);
+        Assertions.assertEquals(objectMapper.readValue(result.getResponse().getContentAsByteArray(), Employee.class),employee);
     }
 
     @Test
@@ -101,7 +102,7 @@ public class EmployeeControllerUnitTests {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
-        Assertions.assertEquals(objectMapper.readValue(result.getResponse().getContentAsByteArray(),Employee.class),employee);
+        Assertions.assertEquals(objectMapper.readValue(result.getResponse().getContentAsByteArray(), Employee.class),employee);
     }
 
     @Test
