@@ -1,4 +1,4 @@
-version: 2.1
+version: 2.2
 orbs:
   node: circleci/node@4.7
 jobs:
@@ -9,9 +9,6 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      - run:
-          name: ls
-          command: ls -R ~
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
@@ -26,13 +23,10 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      - run:
-          name: ls
-          command: ls -R ~
       - node/install-packages:
           pkg-manager: npm
       - run:
-          name: Run tests
+          name: Test
           command: npm test
 
   build-push-images:

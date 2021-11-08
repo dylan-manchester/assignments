@@ -37,6 +37,7 @@ public class EmployeeControllerUnitTests {
     void setup() {
         this.objectMapper = new ObjectMapper();
         this.employee = new Employee();
+        this.employee.setId(1L);
         this.employee.setFirstName("Sam");
         this.employee.setLastName("Emp");
         this.employee.setEmail("sam.emp@gmail.com");
@@ -74,7 +75,7 @@ public class EmployeeControllerUnitTests {
     void putId() throws Exception {
         when(employeeService.updateEmployee(employee,employee.getId())).thenReturn(employee);
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
-                .put("/employee/0")
+                .put("/employee/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(employee))
                 .accept(MediaType.APPLICATION_JSON))
@@ -85,9 +86,9 @@ public class EmployeeControllerUnitTests {
 
     @Test
     void deleteId() throws Exception {
-        when(employeeService.deleteEmployeeById(0L)).thenReturn(employee);
+        when(employeeService.deleteEmployeeById(1L)).thenReturn(employee);
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
-                .delete("/employee/0")
+                .delete("/employee/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -96,9 +97,9 @@ public class EmployeeControllerUnitTests {
 
     @Test
     void getId() throws Exception {
-        when(employeeService.getEmployeeById(0L)).thenReturn(employee);
+        when(employeeService.getEmployeeById(1L)).thenReturn(employee);
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
-                .get("/employee/0")
+                .get("/employee/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();

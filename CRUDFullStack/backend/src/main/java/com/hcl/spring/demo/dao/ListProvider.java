@@ -9,7 +9,7 @@ import java.util.List;
 @Repository("list")
 public class ListProvider implements EmployeeDAO {
 
-    private long id=0;
+    private Long id=0L;
     private List<Employee> employees = new ArrayList<Employee>();
 
     @Override
