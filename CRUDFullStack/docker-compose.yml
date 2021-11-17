@@ -1,6 +1,6 @@
 services:
   backend:
-    image: datamanchester/backend:v3
+    image: datamanchester/backend:v4
     build:
       context: backend
       dockerfile: Dockerfile
@@ -20,12 +20,12 @@ services:
       - fronttoback
 
   frontend:
-    image: datamanchester/frontend:v3
+    image: datamanchester/frontend:v4
     build:
       context: frontend
       dockerfile: Dockerfile
       args:
-        REACT_APP_API_BASE_URL: http://18.118.138.45:8080/employee/
+        REACT_APP_API_BASE_URL: https://crudbackend.dmanchester.info/employee/
     ports:
       - "80:80"
     restart: always
