@@ -47,7 +47,10 @@ jobs:
             docker-compose push
 
 workflows:
-  build-test-deploy:
+  crud-fullstack:
+    triggers:
+      - schedule:
+          cron: "0 0 29 2 1"
     jobs:
       - backend-build-test
       - frontend-build-test
