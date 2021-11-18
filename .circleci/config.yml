@@ -51,6 +51,10 @@ workflows:
     triggers:
       - schedule:
           cron: "0 0 29 2 1"
+          filters:
+            branches:
+              only:
+                - main
     jobs:
       - backend-build-test
       - frontend-build-test
