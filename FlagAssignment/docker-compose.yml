@@ -1,0 +1,20 @@
+services:
+  backend:
+    image: datamanchester/flagBackend:v1
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+
+  frontend:
+    image: datamanchester/flagFrontend:v1
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: https://flag.dmanchester.info:8080/flags/
+    ports:
+      - "80:80"
+    restart: always
