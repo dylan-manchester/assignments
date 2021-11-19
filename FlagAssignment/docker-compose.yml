@@ -14,7 +14,7 @@ services:
       context: frontend
       dockerfile: Dockerfile
       args:
-        REACT_APP_API_BASE_URL: https://flag.dmanchester.info:8080/flags
+        REACT_APP_API_BASE_URL: https://flagbackend.dmanchester.info/flags
     ports:
       - "80:80"
     restart: always
