@@ -22,23 +22,24 @@ class FlagAppComponent extends Component {
     }
     
     addFlag(country) {
-        var xhr = new XMLHttpRequest();
-        let c = this.state.continent;
-        console.log(c)
-        xhr.addEventListener('load', () => {
-            let value = xhr.response.content[0];
-            if (this.state.flags.has(value)) {
-                let new_flags = this.state.flags
-                new_flags.delete(value)
-                this.setState({flags: new_flags});
-            }
-            else {
-                this.setState({flags: this.state.flags.add(value)});
-            }
-        })
-        xhr.responseType = 'json';
-        xhr.open('GET', EMPLOYEE_API_BASE_URL+"/"+c+"/"+country);
-        xhr.send();
+        if ((this.state.continent!=="") && (country!="")) {
+            var xhr = new XMLHttpRequest();
+            let c = this.state.continent;
+            xhr.addEventListener('load', () => {
+                let value = xhr.response.content[0];
+                if (this.state.flags.has(value)) {
+                    let new_flags = this.state.flags
+                    new_flags.delete(value)
+                    this.setState({flags: new_flags});
+                }
+                else {
+                    this.setState({flags: this.state.flags.add(value)});
+                }
+            })
+            xhr.responseType = 'json';
+            xhr.open('GET', EMPLOYEE_API_BASE_URL+"/"+c+"/"+country);
+            xhr.send();
+        }
     }
     
     render() {

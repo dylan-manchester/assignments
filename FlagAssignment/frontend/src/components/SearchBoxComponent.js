@@ -63,7 +63,9 @@ class SearchBoxComponent extends Component {
             this.title = "Select a continent";
         }   
         else {
-            this.getData("/"+this.props.continent);
+            if (this.props.continent!=="") {
+                this.getData("/"+this.props.continent);
+            }
             this.placeholder = "Select a Country";
             this.step = "Step 2:";
             this.title = "Select many countries";
