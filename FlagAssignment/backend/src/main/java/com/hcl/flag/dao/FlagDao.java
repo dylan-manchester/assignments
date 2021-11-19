@@ -17,6 +17,6 @@ public class FlagDao {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public List<Continent> loadFlags() throws IOException {
-        return objectMapper.readValue(new File("src/main/resources/continents.json"), new TypeReference<List<Continent>>(){});
+        return objectMapper.readValue(this.getClass().getClassLoader().getResourceAsStream("continents.json"), new TypeReference<List<Continent>>(){});
     }
 }
