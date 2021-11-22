@@ -3,14 +3,14 @@ package com.hcl.flag.controller;
 
 import com.hcl.flag.models.Response;
 import com.hcl.flag.services.FlagService;
+import com.hcl.flag.services.MetricService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/flags")
@@ -18,6 +18,9 @@ public class FlagController {
 
     @Autowired
     private FlagService flagService;
+
+    @Autowired
+    private MetricService metricService;
 
     @CrossOrigin(origins= "*")
     @GetMapping("")
@@ -31,15 +34,16 @@ public class FlagController {
         return ResponseEntity.ok(new Response(flagService.getCountries(continent)));
     }
 
-    @CrossOrigin(origins= "*")
-    @PostMapping("/{continent}")
-    public ResponseEntity<Response> getFlags(@PathVariable String continent, @RequestBody List<String> countries) {
-        return ResponseEntity.ok(new Response(flagService.getFlags(continent, countries)));
-    }
-
     @CrossOrigin(origins="*")
     @GetMapping("/{continent}/{country}")
     public ResponseEntity<Response> getFlag(@PathVariable String continent, @PathVariable String country) {
         return ResponseEntity.ok(new Response(flagService.getFlags(continent, Arrays.asList(country))));
     }
+
+    @CrossOrigin(origins="*")
+    @GetMapping("/metrics")
+    public String getMetrics() {
+        return metricService.getMetrics();
+    }
+
 }
