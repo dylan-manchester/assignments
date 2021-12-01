@@ -1,37 +1,23 @@
 import React, { Component } from 'react';
 import CheckBoxComponent from './CheckBoxComponent'
 
-const EMPLOYEE_API_BASE_URL = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API_BASE_URL : "http://localhost:8080/flags";
-
 class SearchBoxComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
             text: '',
-            options: [],
-            selected: [],
+            allOptions: [],
+            filteredOptions: [],
             chosen: new Set([])
         }
-        this.changeOptionHandler = this.changeOptionHandler.bind(this);
+        this.filterOptions = this.filterOptions.bind(this);
         this.selectOptionHandler = this.selectOptionHandler.bind(this);
     }
     
-    getData(path) {
-        var xhr = new XMLHttpRequest();
-        xhr.addEventListener('load', () => {
-            console.log(xhr.response);
-            this.setState({options: xhr.response.content,
-                           selected: xhr.response.content});
-        })
-        xhr.responseType = 'json';
-        xhr.open('GET', EMPLOYEE_API_BASE_URL+path);
-        xhr.send();
-    }
-    
-    changeOptionHandler(event) {
+    filterOptions(event) {
         let value = event.target.value;
         this.setState({text: value,
-                       selected: this.state.options.filter(o => o.toLowerCase().startsWith(value.toLowerCase()))});
+                       filteredOptions: this.state.allOptions.filter(o => o.toLowerCase().startsWith(value.toLowerCase()))});
         }
     
     
@@ -49,59 +35,39 @@ class SearchBoxComponent extends Component {
         }
         else {
             this.setState({text: value,
-                           selected: [],
+                           filteredOptions: [],
                            chosen: new Set([value])});
             this.props.selectContinent(value);
         }
     }
     
-    componentDidMount() {
-        if ("continent"===this.props.level) {
-            this.getData("");
-            this.placeholder = "Select a Continent";
-            this.step = "Step 1:";
-            this.title = "Select a continent";
-        }   
-        else {
-            if (this.props.continent!=="") {
-                this.getData("/"+this.props.continent);
-            }
-            this.placeholder = "Select a Country";
-            this.step = "Step 2:";
-            this.title = "Select many countries";
+    componentDidUpdate(prevProps) {
+        if (this.props.updateReady) {
+            this.setState({allOptions: this.props.options,
+                           filteredOptions: this.props.options});
+            this.props.updateComplete();
         }
     }
-    
-    componentDidUpdate(prevProps) {
-        if(this.props.continent !== prevProps.continent) {
-            if ("continent"===this.props.level) {
-                this.getData("");
-            }   
-            else {
-                this.getData("/"+this.props.continent);
-            }
-        }
-    }   
-    
-    
+
+
     render() {
-        if ("continent"===this.props.level | this.props.continent != "") {
+        if (this.state.allOptions.length!==0) {
             return(
                 <div>
                     <div class="search-box">
-                        <p>{this.step}</p>
-                        <p>{this.title}</p>
+                        <p>{this.props.step}</p>
+                        <p>{this.props.title}</p>
                         <form>
-                            <input placeholder={this.placeholder} name="input_field" value={this.state.text} onChange={this.changeOptionHandler}/>
+                            <input placeholder={this.props.placeholder} name="input_field" value={this.state.text} onChange={this.filterOptions}/>
                         </form>
                         <ul class="dropdown">
                             {
-                                this.state.selected.map(
+                                this.state.filteredOptions.map(
                                     option =>
                                     <li key={option} class="dropdown-item">
-                                        <button class="dropdown-button" onClick={() => this.selectOptionHandler(option)}> 
-                                            <CheckBoxComponent display={this.props.multiselect} checked={this.state.chosen.has(option)} onChange={() => console.log("changed")}/>
-                                            {option} 
+                                        <button class="dropdown-button" onClick={() => this.selectOptionHandler(option)}>
+                                            <CheckBoxComponent display={this.props.multiselect} checked={this.state.chosen.has(option)} />
+                                            {option}
                                         </button>
                                     </li>
                                 )

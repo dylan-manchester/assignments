@@ -2,7 +2,7 @@ function CheckBoxComponent(props) {
     if (props.display==="true") {
         return(
             <span style={{float: "left"}}>
-                <input type="checkbox" checked={props.checked} onChange={props.onChange}/>
+                <input type="checkbox" checked={props.checked} onChange={() => console.log("Toggle")}/>
             </span>
         )
     }
