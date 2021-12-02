@@ -1,6 +1,6 @@
 services:
   backend:
-    image: datamanchester/flagbackend:v1
+    image: datamanchester/flagbackend:v2
     build:
       context: backend
       dockerfile: Dockerfile
@@ -9,7 +9,7 @@ services:
     restart: always
 
   frontend:
-    image: datamanchester/flagfrontend:v1
+    image: datamanchester/flagfrontend:v2
     build:
       context: frontend
       dockerfile: Dockerfile
