@@ -13,17 +13,18 @@ class SearchBoxComponent extends Component {
         this.filterOptions = this.filterOptions.bind(this);
         this.selectOptionHandler = this.selectOptionHandler.bind(this);
     }
-    
+
+    // Typeahead functionality
     filterOptions(event) {
         let value = event.target.value;
         this.setState({text: value,
                        filteredOptions: this.state.allOptions.filter(o => o.toLowerCase().startsWith(value.toLowerCase()))});
         }
     
-    
+    // Called when an option is selected
     selectOptionHandler(value) {
         if (this.props.multiselect==="true") {
-            this.props.addFlag(value);
+        // Toggle checkbox for multiselect
             if (this.state.chosen.has(value)) {
                 let new_chosen = this.state.chosen
                 new_chosen.delete(value)
@@ -34,23 +35,30 @@ class SearchBoxComponent extends Component {
             }
         }
         else {
+        // Choose singular option
             this.setState({text: value,
                            filteredOptions: [],
                            chosen: new Set([value])});
-            this.props.selectContinent(value);
         }
+        // Parent selectOption event
+        this.props.selectOption(value)
     }
     
     componentDidUpdate(prevProps) {
+        // If options have been updated
         if (this.props.updateReady) {
-            this.setState({allOptions: this.props.options,
+            // Reset text and options
+            this.setState({text: '',
+                           allOptions: this.props.options,
                            filteredOptions: this.props.options});
+            // Event to let parent know options were updated
             this.props.updateComplete();
         }
     }
 
 
     render() {
+        // Only render if there are options available
         if (this.state.allOptions.length!==0) {
             return(
                 <div>

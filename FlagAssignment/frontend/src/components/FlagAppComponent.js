@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchBoxComponent from './SearchBoxComponent'
 
+// Backend API URL is defined by env variables
 const EMPLOYEE_API_BASE_URL = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API_BASE_URL : "http://localhost:8080/flags";
 
 class FlagAppComponent extends Component {
@@ -22,35 +23,33 @@ class FlagAppComponent extends Component {
     }
 
     componentDidMount() {
-        this.getOptions("");
+        // Load options for continent search box
+        this.getData("",this.getContinentHandler);
     }
 
+    // Passable function to allow continent search box indicate that it was updated
     continentsUpdated() {
         this.setState({continentOptionsReady: false})
     }
 
+    // Passable function to allow country search box indicate that it was updated
     countriesUpdated() {
         this.setState({countryOptionsReady: false})
     }
 
+    // Passable function for continent search box to indicate a selection was chosen
     changeContinent(value) {
         this.setState({continent: value});
-        this.getOptions("/"+value);
+        // Load options for country search box
+        this.getData("/"+value,this.getCountriesHandler);
     }
 
+    // Passable function to allow country search box indicate a country was toggled
     addFlag(country) {
         this.getData("/"+this.state.continent+"/"+country,this.addFlagHandler)
     }
 
-    getOptions = (path) => {
-        if (path==="") {
-            this.getData(path,this.getContinentHandler);
-        }
-        else {
-            this.getData(path,this.getCountriesHandler);
-        }
-    }
-
+    // General data access function
     getData = (path,loadHandler) => {
             var xhr = new XMLHttpRequest();
             xhr.addEventListener('load', loadHandler)
@@ -59,6 +58,7 @@ class FlagAppComponent extends Component {
             xhr.send();
     }
 
+    // Toggles display of flag received by request
     addFlagHandler = (rv) => {
         let value = rv.target.response.content[0];
         if (this.state.flags.has(value)) {
@@ -71,12 +71,14 @@ class FlagAppComponent extends Component {
         }
     }
 
+    // Sets options and ready status for continent search box
     getContinentHandler = (rv) => {
         let value = rv.target.response.content;
         this.setState({continentOptions: value,
                        continentOptionsReady: true});
     }
 
+    // Sets options and ready status for country search box
     getCountriesHandler = (rv) => {
         let value = rv.target.response.content;
         this.setState({countryOptions: value,
@@ -91,23 +93,20 @@ class FlagAppComponent extends Component {
                 <SearchBoxComponent options={this.state.continentOptions}
                                     updateReady={this.state.continentOptionsReady}
                                     updateComplete={this.continentsUpdated}
-                                    level="continent"
                                     multiselect="false"
-                                    selectContinent={this.changeContinent}
                                     placeholder = "Select a Continent"
                                     step = "Step 1:"
                                     title = "Select a continent"
+                                    selectOption={this.changeContinent}
                                     />
                 <SearchBoxComponent options={this.state.countryOptions}
                                     updateReady={this.state.countryOptionsReady}
                                     updateComplete={this.countriesUpdated}
-                                    level="country"
                                     multiselect="true"
-                                    continent={this.state.continent}
-                                    addFlag={this.addFlag}
                                     placeholder = "Select a Country"
                                     step = "Step 2:"
                                     title = "Select many countries"
+                                    selectOption={this.addFlag}
                                     />
               </div>
               <div className="Flag-container">
