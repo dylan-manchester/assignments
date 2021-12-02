@@ -85,9 +85,9 @@ class FlagAppComponent extends Component {
 
     render() {
         return(
-            <div class="App">
-              <header class="App-header">Flag Selector</header>
-              <div class="Search-box-container">
+            <div className="App">
+              <header className="App-header">Flag Selector</header>
+              <div className="Search-box-container">
                 <SearchBoxComponent options={this.state.continentOptions}
                                     updateReady={this.state.continentOptionsReady}
                                     updateComplete={this.continentsUpdated}
@@ -110,13 +110,13 @@ class FlagAppComponent extends Component {
                                     title = "Select many countries"
                                     />
               </div>
-              <div class="Flag-container">
-                <header class="Flag-header">Selected Flags:</header> 
-                <ul class="flags">
+              <div className="Flag-container">
+                <header className="Flag-header">Selected Flags:</header> 
+                <ul className="flags">
                     {
                         Array.from(this.state.flags).map(
                             flag =>
-                            <li key={flag} class="flag">
+                            <li key={flag} className="flag">
                                 {flag}
                             </li>
                         )

@@ -54,18 +54,18 @@ class SearchBoxComponent extends Component {
         if (this.state.allOptions.length!==0) {
             return(
                 <div>
-                    <div class="search-box">
+                    <div className="search-box">
                         <p>{this.props.step}</p>
                         <p>{this.props.title}</p>
                         <form>
                             <input placeholder={this.props.placeholder} name="input_field" value={this.state.text} onChange={this.filterOptions}/>
                         </form>
-                        <ul class="dropdown">
+                        <ul className="dropdown">
                             {
                                 this.state.filteredOptions.map(
                                     option =>
-                                    <li key={option} class="dropdown-item">
-                                        <button class="dropdown-button" onClick={() => this.selectOptionHandler(option)}>
+                                    <li key={option} className="dropdown-item">
+                                        <button className="dropdown-button" onClick={() => this.selectOptionHandler(option)}>
                                             <CheckBoxComponent display={this.props.multiselect} checked={this.state.chosen.has(option)} />
                                             {option}
                                         </button>
