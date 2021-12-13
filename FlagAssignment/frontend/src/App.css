@@ -1,48 +1,62 @@
 .App {
-    text-align: center;
+    /* Fill entire screen with background color */
     background-color: #282c34;
     min-height: 100vh;
+    min-width: 100vw;
+    /* Center all content to make it look nice */
+    text-align: center;
     flex-direction: column;
     align-items: center;
     display: flex;
-}
-
-.App-header {
-    height: calc(100px + 2vmin);;
-    color: white;
-    font-size: calc(25px + 2vmin);
-    font-weight: bold;
-    vertical-align: top;
-}
-
-.Search-box-container {
-    display: inline-flex;
-    min-height: 40vh;
-    height: 60%;
-}
-
-p {
     color: aliceblue;
 }
 
-.search-box {
-    margin: 0 40px;
+.App-header {
+    /* Scale with screen size */
+    height: 15vmin;
+    font-size: 7vmin;
+    font-weight: bold;
 }
 
+.Search-box-container {
+    /* Evenly space at top in center with flex wrap for smaller screens */
+    align-items: top;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-bottom: 5vmin;
+    font-size: 3vmin;
+    min-height: 30vmin;
+}
+
+.search-box {
+    /* Add space around each search box */
+    margin: 10px 40px;
+}
+
+.search-box-description p{
+    /* Remove margins from description */
+    margin: 1px;
+}
+
+.search-box-content form input {
+    /* Resize text input box based on screen size */
+    font-size: 3vmin;
+}
+
+/* Dropdown menu from list */
 .dropdown {
     margin: 0;
     padding: 0;
     border: 2px solid white;
     border-top: none;
-    list-style-type: none;
 }
-
 .dropdown-item {
     border: .5px solid black;
     border-top: none;
     display: flex;
+    width: 100%;
 }
-
 .dropdown-button {
     margin: 0;
     padding: 0;
@@ -50,8 +64,8 @@ p {
     width: 100%;
     height: 100%;
     display: block;
+    font-size: 3vmin;
 }
-
 .dropdown-button:hover
 {
   font-weight: bold;
@@ -59,29 +73,30 @@ p {
   background-color: #FFFFE0;
   border: 1px #99ccff solid;
 }
-
 .dropdown-button:active
 {
   background-color: #FFFFD0;
   border: 1px solid black;
 }
 
-.flag-container {
-    height: 30%
-}
 
+/* Display selected flags */
+.flag-container {
+    height: 30vmin;
+}
 .Flag-header {
     height: 10%;
     color: white;
-    font-size: calc(10px + 2vmin);
+    font-size: 5vmin;
 }
-
 .flags {
     display: inline-block;
+    align-content: center;
+    padding-left: 0;
 }
-
 .flag {
     display: inline-block;
     margin: 10px;
     color: aliceblue;
+    font-size: 5vmin;
 }

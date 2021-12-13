@@ -61,10 +61,12 @@ class SearchBoxComponent extends Component {
         // Only render if there are options available
         if (this.state.allOptions.length!==0) {
             return(
-                <div>
-                    <div className="search-box">
+                <div className="search-box">
+                    <div className="search-box-description">
                         <p>{this.props.step}</p>
                         <p>{this.props.title}</p>
+                    </div>
+                    <div className="search-box-content">
                         <form>
                             <input placeholder={this.props.placeholder} name="input_field" value={this.state.text} onChange={this.filterOptions}/>
                         </form>
